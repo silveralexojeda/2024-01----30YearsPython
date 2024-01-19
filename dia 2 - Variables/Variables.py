@@ -209,6 +209,8 @@ print("la cantidad de caracteres en mi nombre es: ", len(nombre))
 #Run help('keywords') in Python shell or in your file to check for the Python reserved words or keywords
 
 ###aqui estas actualizado###
+#hola
+BORRA Estado_civil
 
 input("FIN DE PROGRAMA -> Presiona Enter para continuar")
 
