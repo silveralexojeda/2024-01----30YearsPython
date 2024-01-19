@@ -191,7 +191,7 @@ print(type(verdadero))
 print(type(liegro))
 print(type(nombre,objeto,peso))
 #Using the len() built-in function, find the length of your first name
-
+print("la cantidad de caracteres en mi nombre es: ", len(nombre))
 #Compare the length of your first name and your last name
 #Declare 5 as num_one and 4 as num_two
 #Add num_one and num_two and assign the value to a variable total
@@ -208,7 +208,7 @@ print(type(nombre,objeto,peso))
 #Use the built-in input function to get first name, last name, country and age from a user and store the value to their corresponding variable names
 #Run help('keywords') in Python shell or in your file to check for the Python reserved words or keywords
 
-
+##aqui estas actualizado###
 
 input("FIN DE PROGRAMA -> Presiona Enter para continuar")
 
