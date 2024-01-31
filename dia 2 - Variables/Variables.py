@@ -208,10 +208,7 @@ print("la cantidad de caracteres en mi nombre es: ", len(nombre))
 #Use the built-in input function to get first name, last name, country and age from a user and store the value to their corresponding variable names
 #Run help('keywords') in Python shell or in your file to check for the Python reserved words or keywords
 
-###aqui estas actualizado###
-#hola
-BORRA Estado_civil
-
+###enviando actualizacion###
 input("FIN DE PROGRAMA -> Presiona Enter para continuar")
 
 
