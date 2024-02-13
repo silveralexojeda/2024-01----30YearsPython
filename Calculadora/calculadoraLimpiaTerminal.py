@@ -1,5 +1,4 @@
 import os
-import subprocess
 import keyboard
 
 class Calculadora:
@@ -16,14 +15,15 @@ class Calculadora:
     def solicitar_numeros(self):
         # Método para solicitar los números al usuario
         try:
-            self.numero1 = float(input("Ingrese el primer número: "))
-            self.numero2 = float(input("Ingrese el segundo número: "))
+            self.numero1 = float(input("*Ingrese el primer número: "))
+            self.numero2 = float(input("**Ingrese el segundo número: "))
         except ValueError:
             print("Error: Ingrese números válidos.")
 
     def limpiar_terminal(self):
         # Método para limpiar la terminal
-        subprocess.call('clear' if os.name == 'posix' else 'cls', shell=True)
+        #subprocess.call('clear' if os.name == 'posix' else 'cls', shell=True)
+        print("\n"*35)
 
     def sumar(self):
         return self.numero1 + self.numero2
@@ -70,6 +70,9 @@ while True:
     print("División:", resultado_division,"\n")
 
     # Preguntar si desea salir
-    print("\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.")
-    if keyboard.read_event().name == 'esc':
+    #print("\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.")
+    #if keyboard.read_event().name == 'esc':
+
+    x = input("presione x + enter para salir\n")
+    if "x" == x:
         break
