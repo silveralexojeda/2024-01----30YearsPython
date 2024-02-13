@@ -1,3 +1,4 @@
+import os
 import subprocess
 import keyboard
 
@@ -15,8 +16,8 @@ class Calculadora:
     def solicitar_numeros(self):
         # Método para solicitar los números al usuario
         try:
-            self.numero1 = float(input("\n\nIngrese el primer número: \n\n"))
-            self.numero2 = float(input("\n\nIngrese el segundo número: \n\n"))
+            self.numero1 = float(input("\n\nIngrese el primer número:"))
+            self.numero2 = float(input("Ingrese el segundo número:"))
         except ValueError:
             print("Error: Ingrese números válidos.")
 
@@ -63,11 +64,7 @@ while True:
     print("División:", resultado_division)
 
     # Preguntar si desea salir
-    print("\n.")
-    print("\n")
-    print("\n.")
-    print("\n")
-    print("\n.")
-    print("\n\n\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.\n\n\n")
+    
+    print("\n\n\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.")
     if keyboard.read_event().name == 'esc':
         break
