@@ -16,8 +16,8 @@ class Calculadora:
     def solicitar_numeros(self):
         # Método para solicitar los números al usuario
         try:
-            self.numero1 = float(input("Ingrese el primer número:"))
-            self.numero2 = float(input("Ingrese el segundo número:"))
+            self.numero1 = float(input("Ingrese el primer número: "))
+            self.numero2 = float(input("Ingrese el segundo número: "))
         except ValueError:
             print("Error: Ingrese números válidos.")
 
@@ -43,6 +43,8 @@ class Calculadora:
 # Ciclo principal
 while True:
     # Uso de la calculadora
+    #crea objeto mi_calculadora 
+    #es una variable con valor tipo class
     mi_calculadora = Calculadora()
 
     # Limpiar la terminal
@@ -57,7 +59,7 @@ while True:
     resultado_multiplicacion = mi_calculadora.multiplicar()
     resultado_division = mi_calculadora.dividir()
 
-    # Preguntar si desea salir
+    
     
    
 
@@ -65,8 +67,9 @@ while True:
     print("Suma:", resultado_suma)
     print("Resta:", resultado_resta)
     print("Multiplicación:", resultado_multiplicacion)
-    print("División:", resultado_division)
+    print("División:", resultado_division,"\n")
 
+    # Preguntar si desea salir
     print("\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.")
     if keyboard.read_event().name == 'esc':
         break
