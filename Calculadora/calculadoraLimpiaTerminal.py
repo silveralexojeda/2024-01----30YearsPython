@@ -16,7 +16,7 @@ class Calculadora:
     def solicitar_numeros(self):
         # Método para solicitar los números al usuario
         try:
-            self.numero1 = float(input("\n\nIngrese el primer número:"))
+            self.numero1 = float(input("Ingrese el primer número:"))
             self.numero2 = float(input("Ingrese el segundo número:"))
         except ValueError:
             print("Error: Ingrese números válidos.")
@@ -57,14 +57,16 @@ while True:
     resultado_multiplicacion = mi_calculadora.multiplicar()
     resultado_division = mi_calculadora.dividir()
 
+    # Preguntar si desea salir
+    
+   
+
     # Mostrar resultados
     print("Suma:", resultado_suma)
     print("Resta:", resultado_resta)
     print("Multiplicación:", resultado_multiplicacion)
     print("División:", resultado_division)
 
-    # Preguntar si desea salir
-    
-    print("\n\n\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.")
+    print("\nPresiona 'Esc' para salir, o cualquier otra tecla para continuar.")
     if keyboard.read_event().name == 'esc':
         break
