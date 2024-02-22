@@ -1,5 +1,3 @@
-import os
-import keyboard
 import time
 
 class Calculadora: 
@@ -45,6 +43,9 @@ class Calculadora:
             return self.numero1 / self.numero2
         else:
             return "No se puede dividir por cero"
+    
+    def cuadrado(self):
+        return self.numero1 * self.numero1
 
 # Ciclo principal
 while True:
@@ -62,24 +63,20 @@ while True:
     mi_calculadora.solicitar_numeros()
     
     
-    def cuadrado(self):
-    return self.numero1 * self.numero2
 
-
-    mi_calculadora.sqr = cuadrado()
-    segunda_calculadora.sqr = cuadrado()
 
 
     # Operaciones
     resultado_suma = mi_calculadora.sumar()
     resultado_resta = mi_calculadora.restar()
     resultado_multiplicacion = mi_calculadora.multiplicar()
+    
     resultado_division = mi_calculadora.dividir()
+    
+    resultado_cuadrados=mi_calculadora.cuadrado()
 
     
     
-   
-
     # Mostrar resultados
     print("\n"*100)
     print("**************************************************") #50 * y 35+13=48
@@ -88,6 +85,7 @@ while True:
     print("||Resta:", resultado_resta," "*(37-len(str(resultado_resta))),"||")
     print("||Multiplicación:", resultado_multiplicacion," "*(28-len(str(resultado_multiplicacion))),"||")
     print("||División:", resultado_division, " "*(34-len(str(resultado_division))),"||")
+    print("||el resultado del cuadrado del primer numero es: ",resultado_cuadrados," "*(34-len(str(resultado_division))),"||")
     print("**************************************************\n")
 
     # Preguntar si desea salir
