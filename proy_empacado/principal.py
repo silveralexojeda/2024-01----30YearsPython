@@ -1,15 +1,21 @@
 import sqlite3
 from datetime import datetime
 
-# Función para conectar con la base de datos
-def conectar_base_datos():
-    conexion = sqlite3.connect('Seleccion_y_relaciones.db')
+# Función para conectar con la base de datos de cajas
+def conectar_base_datos_cajas():
+    conexion = sqlite3.connect('base_de_datos.db')
     cursor = conexion.cursor()
     return conexion, cursor
 
-# Función para crear la tabla si no existe
-def crear_tabla():
-    conexion, cursor = conectar_base_datos()
+# Función para conectar con la base de datos de filtros
+def conectar_base_datos_filtros():
+    conexion = sqlite3.connect('base_de_datos_filtros.db')
+    cursor = conexion.cursor()
+    return conexion, cursor
+
+# Función para crear la tabla si no existe en la base de datos de asignaciones
+def crear_tabla_asignaciones():
+    conexion, cursor = conectar_base_datos_cajas()  # Corregido: Conectar a la base de datos de cajas
     cursor.execute('''CREATE TABLE IF NOT EXISTS Empaquetado (
                         ID INTEGER PRIMARY KEY AUTOINCREMENT,
                         Filtro TEXT,
@@ -20,26 +26,35 @@ def crear_tabla():
     conexion.commit()
     conexion.close()
 
-# Función para mostrar todos los datos almacenados
-def mostrar_datos():
-    conexion, cursor = conectar_base_datos()
+# Función para mostrar todos los datos almacenados en la base de datos de asignaciones
+def mostrar_asignaciones():
+    conexion, cursor = conectar_base_datos_cajas()  # Corregido: Conectar a la base de datos de cajas
     cursor.execute("SELECT * FROM Empaquetado")
-    datos = cursor.fetchall()
-    for dato in datos:
-        print(dato)
+    asignaciones = cursor.fetchall()
+    if asignaciones:
+        print("Asignaciones resguardadas en la base de datos:")
+        for asignacion in asignaciones:
+            print(asignacion)
+    else:
+        print("No hay asignaciones resguardadas en la base de datos.")
     conexion.close()
 
 # Función para realizar asignación caja a filtro
 def asignar_caja_filtro(filtro):
-    conexion, cursor = conectar_base_datos()
-    cursor.execute("SELECT * FROM Cajas")
-    cajas = cursor.fetchall()
+    conexion_filtros, cursor_filtros = conectar_base_datos_filtros()
+    cursor_filtros.execute("SELECT * FROM Filtros")
+    filtros = cursor_filtros.fetchall()
+
+    conexion_cajas, cursor_cajas = conectar_base_datos_cajas()
+    cursor_cajas.execute("SELECT * FROM Cajas")
+    cajas = cursor_cajas.fetchall()
 
     resultados = []
     for caja in cajas:
-        # Calcula la holgura entre el filtro y la caja
-        holgura = calcular_holgura(filtro, caja)
-        resultados.append((filtro, caja[1], holgura))  # Se agrega el ID de la caja
+        for filtro_db in filtros:
+            # Calcula la holgura entre el filtro y la caja
+            holgura = calcular_holgura(filtro_db, caja)
+            resultados.append((filtro_db, caja[1], holgura))  # Se agrega el ID de la caja
 
     for resultado in resultados:
         print(resultado)
@@ -64,14 +79,18 @@ def asignar_caja_filtro(filtro):
 
 # Función para calcular la holgura entre el filtro y la caja
 def calcular_holgura(filtro, caja):
+     # Convertir las dimensiones de filtro y caja a números
+    filtro_dimensiones = tuple(map(int, filtro[1:]))
+    caja_dimensiones = caja[1:]
+
     # Calcula las diferencias de dimensiones entre la caja y el filtro
-    diferencia_largo = abs(caja[1] - filtro[1])
-    diferencia_ancho = abs(caja[2] - filtro[2])
-    diferencia_alto = abs(caja[3] - filtro[3])
+    diferencia_largo = abs(caja_dimensiones[0] - filtro_dimensiones[0])
+    diferencia_ancho = abs(caja_dimensiones[1] - filtro_dimensiones[1])
+    diferencia_alto = abs(caja_dimensiones[2] - filtro_dimensiones[2])
 
     # Calcula la diferencia volumétrica
-    diferencia_volumetrica_caja = caja[1] * caja[2] * caja[3]
-    diferencia_volumetrica_filtro = filtro[1] * filtro[2] * filtro[3]
+    diferencia_volumetrica_caja = caja_dimensiones[0] * caja_dimensiones[1] * caja_dimensiones[2]
+    diferencia_volumetrica_filtro = filtro_dimensiones[0] * filtro_dimensiones[1] * filtro_dimensiones[2]
     diferencia_volumetrica = abs(diferencia_volumetrica_caja - diferencia_volumetrica_filtro)
 
     # Devuelve la menor de las diferencias como holgura
@@ -80,7 +99,7 @@ def calcular_holgura(filtro, caja):
 
 # Función para buscar todas las cajas
 def buscar_todas_cajas():
-    conexion, cursor = conectar_base_datos()
+    conexion, cursor = conectar_base_datos_cajas()
     cursor.execute("SELECT * FROM Cajas")
     cajas = cursor.fetchall()
 
@@ -98,7 +117,8 @@ def menu():
         print("\n---- Menú ----")
         print("1. Realizar asignación caja a filtro")
         print("2. Buscar todas las cajas")
-        print("3. Salir del programa")
+        print("3. Mostrar asignaciones resguardadas")
+        print("4. Salir del programa")
         opcion = input("Seleccione una opción: ")
 
         if opcion == '1':
@@ -107,6 +127,8 @@ def menu():
         elif opcion == '2':
             buscar_todas_cajas()
         elif opcion == '3':
+            mostrar_asignaciones()
+        elif opcion == '4':
             confirmacion = input("¿Está seguro de que desea salir del programa? (Sí/No): ")
             if confirmacion.lower() == 'si':
                 print("Saliendo del programa...")
@@ -118,7 +140,7 @@ def menu():
 
 # Función principal para ejecutar el programa
 def main():
-    crear_tabla()
+    crear_tabla_asignaciones()
     menu()
 
 if __name__ == "__main__":

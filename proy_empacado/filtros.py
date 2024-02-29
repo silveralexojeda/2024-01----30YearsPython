@@ -6,21 +6,21 @@ def crear_tabla():
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS filtros (
-            id INTEGER PRIMARY KEY,
-            nombre TEXT NOT NULL,
-            tipo TEXT NOT NULL,
-            tamaño INTEGER NOT NULL,
-            material TEXT NOT NULL
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            modelo TEXT NOT NULL,
+            largo_filtro REAL NOT NULL,
+            ancho_filtro REAL NOT NULL,
+            alto_filtro REAL NOT NULL
         )
     ''')
     conn.commit()
     conn.close()
 
 # Función para añadir un nuevo filtro
-def añadir_filtro(nombre, tipo, tamaño, material):
+def añadir_filtro(modelo, largo_filtro, ancho_filtro, alto_filtro):
     conn = sqlite3.connect('base_de_datos_filtros.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO filtros (nombre, tipo, tamaño, material) VALUES (?, ?, ?, ?)', (nombre, tipo, tamaño, material))
+    cursor.execute('INSERT INTO filtros (modelo, largo_filtro, ancho_filtro, alto_filtro) VALUES (?, ?, ?, ?)', (modelo, largo_filtro, ancho_filtro, alto_filtro))
     conn.commit()
     conn.close()
 
@@ -50,11 +50,11 @@ def main():
             print("\nFiltros almacenados:")
             mostrar_filtros()
         elif opcion == "2":
-            nombre = input("Ingrese el nombre del filtro: ")
-            tipo = input("Ingrese el tipo del filtro: ")
-            tamaño = int(input("Ingrese el tamaño del filtro: "))
-            material = input("Ingrese el material del filtro: ")
-            añadir_filtro(nombre, tipo, tamaño, material)
+            modelo = input("Ingrese el modelo del filtro: ")
+            largo_filtro = float(input("Ingrese el largo del filtro: "))
+            ancho_filtro = float(input("Ingrese el ancho del filtro: "))
+            alto_filtro = float(input("Ingrese el alto del filtro: "))
+            añadir_filtro(modelo, largo_filtro, ancho_filtro, alto_filtro)
             print("¡Filtro añadido exitosamente!")
         elif opcion == "3":
             pass  # Aquí iría la lógica para modificar un filtro
