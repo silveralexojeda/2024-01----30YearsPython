@@ -3,7 +3,7 @@ from datetime import datetime
 
 # Función para conectar con la base de datos de cajas
 def conectar_base_datos_cajas():
-    conexion = sqlite3.connect('base_de_datos.db')
+    conexion = sqlite3.connect('base_de_datos_empacado.db')
     cursor = conexion.cursor()
     return conexion, cursor
 
@@ -79,9 +79,11 @@ def asignar_caja_filtro(filtro):
 
 # Función para calcular la holgura entre el filtro y la caja
 def calcular_holgura(filtro, caja):
-     # Convertir las dimensiones de filtro y caja a números
-    filtro_dimensiones = tuple(map(int, filtro[1:]))
-    caja_dimensiones = caja[1:]
+    # Convertir las dimensiones de filtro a números
+    filtro_dimensiones = tuple(map(float, filtro[2:]))  # Empezamos desde el índice 2 para omitir el modelo
+
+    # Convertir las dimensiones de caja a números
+    caja_dimensiones = tuple(map(float, caja[1:]))
 
     # Calcula las diferencias de dimensiones entre la caja y el filtro
     diferencia_largo = abs(caja_dimensiones[0] - filtro_dimensiones[0])
@@ -96,6 +98,8 @@ def calcular_holgura(filtro, caja):
     # Devuelve la menor de las diferencias como holgura
     holgura = min(diferencia_largo, diferencia_ancho, diferencia_alto, diferencia_volumetrica)
     return holgura
+
+
 
 # Función para buscar todas las cajas
 def buscar_todas_cajas():

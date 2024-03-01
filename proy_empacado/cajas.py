@@ -2,31 +2,31 @@ import sqlite3
 
 # Función para crear la tabla de cajas si no existe
 def crear_tabla():
-    conn = sqlite3.connect('base_de_datos.db')
+    conn = sqlite3.connect('base_de_datos_cajas.db')
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS cajas (
-            id INTEGER PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             modelo TEXT NOT NULL,
-            largo INTEGER NOT NULL,
-            ancho INTEGER NOT NULL,
-            alto INTEGER NOT NULL
+            largo_caja INTEGER NOT NULL,
+            ancho_caja INTEGER NOT NULL,
+            alto_caja INTEGER NOT NULL
         )
     ''')
     conn.commit()
     conn.close()
 
 # Función para añadir una nueva caja
-def añadir_caja(modelo, largo, ancho, alto):
-    conn = sqlite3.connect('base_de_datos.db')
+def añadir_caja(modelo, largo_caja, ancho_caja, alto_caja):
+    conn = sqlite3.connect('base_de_datos_cajas.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO cajas (modelo, largo, ancho, alto) VALUES (?, ?, ?, ?)', (modelo, largo, ancho, alto))
+    cursor.execute('INSERT INTO cajas (modelo, largo_caja, ancho_caja, alto_caja) VALUES (?, ?, ?, ?)', (modelo, largo_caja, ancho_caja, alto_caja))
     conn.commit()
     conn.close()
 
 # Función para mostrar todas las cajas almacenadas
 def mostrar_cajas():
-    conn = sqlite3.connect('base_de_datos.db')
+    conn = sqlite3.connect('base_de_datos_cajas.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM cajas')
     cajas = cursor.fetchall()
@@ -53,10 +53,10 @@ def main():
             mostrar_cajas()
         elif opcion == "2":
             modelo = input("Ingrese el modelo de la caja: ")
-            largo = int(input("Ingrese el largo de la caja: "))
-            ancho = int(input("Ingrese el ancho de la caja: "))
-            alto = int(input("Ingrese el alto de la caja: "))
-            añadir_caja(modelo, largo, ancho, alto)
+            largo_caja = int(input("Ingrese el largo de la caja: "))
+            ancho_caja = int(input("Ingrese el ancho de la caja: "))
+            alto_caja = int(input("Ingrese el alto de la caja: "))
+            añadir_caja(modelo, largo_caja, ancho_caja, alto_caja)
             print("¡Caja añadida exitosamente!")
         elif opcion == "3":
             pass  # Aquí iría la lógica para modificar una caja

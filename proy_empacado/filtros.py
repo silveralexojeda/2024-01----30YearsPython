@@ -8,9 +8,9 @@ def crear_tabla():
         CREATE TABLE IF NOT EXISTS filtros (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             modelo TEXT NOT NULL,
-            largo_filtro REAL NOT NULL,
-            ancho_filtro REAL NOT NULL,
-            alto_filtro REAL NOT NULL
+            largo_filtro INTEGER NOT NULL,
+            ancho_filtro INTEGER NOT NULL,
+            alto_filtro INTEGER NOT NULL
         )
     ''')
     conn.commit()
