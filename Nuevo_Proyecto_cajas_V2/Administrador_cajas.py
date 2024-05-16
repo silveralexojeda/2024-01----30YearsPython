@@ -59,7 +59,7 @@ def mostrar_cajas(c):
         else:
             print("Cajas almacenadas:")
             for box in boxes:
-                print("ID:", box[0], "- Dimensiones internas:", box[1:5], "- Dimensiones externas:", box[6:])
+                print("ID:", box[0], "- Dimensiones internas:", box[1:4],"  -> espesores: ",box[5:6], " -> Dimensiones externas:", box[6:])
     except Exception as e:
         print("Error al mostrar las cajas:", str(e))
 
