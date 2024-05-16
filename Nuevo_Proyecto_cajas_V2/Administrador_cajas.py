@@ -35,7 +35,7 @@ def calcular_dimensiones_externas(largo_interno, ancho_interno, alto_interno, es
 def crear_caja(conn, c, largo_interno, ancho_interno, alto_interno, espesor_material_largoyancho, espesor_material_alto):
     try:
         # Validación de entradas no válidas
-        if largo_interno <= 0 or ancho_interno <= 0 or alto_interno <= 0 or espesor_material_largoyancho not in [5, 7] or espesor_material_alto != 9:
+        if largo_interno <= 0 or ancho_interno <= 0 or alto_interno <= 0 or espesor_material_largoyancho <= 0 or espesor_material_alto <= 9: #antes: if largo_interno <= 0 or ancho_interno <= 0 or alto_interno <= 0 or espesor_material_largoyancho not in [5, 7] or espesor_material_alto != 9:
             print("Entradas no válidas. Verifique las dimensiones y el espesor del material.")
             return
 
@@ -76,7 +76,7 @@ def eliminar_caja(conn, c, box_id):
 def editar_caja(conn, c, box_id, largo_interno, ancho_interno, alto_interno, espesor_material_largoyancho, espesor_material_alto):
     try:
         # Validación de entradas no válidas
-        if largo_interno <= 0 or ancho_interno <= 0 or alto_interno <= 0 or espesor_material_largoyancho not in [5, 7] or espesor_material_alto != 9:
+        if largo_interno <= 0 or ancho_interno <= 0 or alto_interno <= 0 or espesor_material_largoyancho <= 0 or espesor_material_alto <= 9:
             print("Entradas no válidas. Verifique las dimensiones y el espesor del material.")
             return
 
