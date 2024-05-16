@@ -17,6 +17,18 @@ def crear_tabla():
     conn.close()
 
 # Función para añadir un nuevo filtro
+def solicitar_datos_filtro():
+    while True:
+        modelo = input("Ingrese el modelo del filtro: ")
+        try:
+            largo_filtro = float(input("Ingrese el largo del filtro: "))
+            ancho_filtro = float(input("Ingrese el ancho del filtro: "))
+            alto_filtro = float(input("Ingrese el alto del filtro: "))
+            return modelo, largo_filtro, ancho_filtro, alto_filtro
+        except ValueError:
+            print("¡Error! Ha ingresado un tipo de valor incorrecto. Por favor, intente nuevamente.")
+
+# Función para insertar un nuevo filtro en la base de datos
 def añadir_filtro(modelo, largo_filtro, ancho_filtro, alto_filtro):
     conn = sqlite3.connect('base_de_datos_filtros.db')
     cursor = conn.cursor()
@@ -50,10 +62,7 @@ def main():
             print("\nFiltros almacenados:")
             mostrar_filtros()
         elif opcion == "2":
-            modelo = input("Ingrese el modelo del filtro: ")
-            largo_filtro = float(input("Ingrese el largo del filtro: "))
-            ancho_filtro = float(input("Ingrese el ancho del filtro: "))
-            alto_filtro = float(input("Ingrese el alto del filtro: "))
+            modelo, largo_filtro, ancho_filtro, alto_filtro = solicitar_datos_filtro()
             añadir_filtro(modelo, largo_filtro, ancho_filtro, alto_filtro)
             print("¡Filtro añadido exitosamente!")
         elif opcion == "3":

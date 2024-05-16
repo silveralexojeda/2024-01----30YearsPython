@@ -17,6 +17,18 @@ def crear_tabla():
     conn.close()
 
 # Función para añadir una nueva caja
+def solicitar_datos_caja():
+    while True:
+        modelo = input("Ingrese el modelo de la caja: ")
+        try:
+            largo_caja = float(input("Ingrese el largo de la caja: "))
+            ancho_caja = float(input("Ingrese el ancho de la caja: "))
+            alto_caja = float(input("Ingrese el alto de la caja: "))
+            return modelo, largo_caja, ancho_caja, alto_caja
+        except ValueError:
+            print("¡Error! Ha ingresado un tipo de valor incorrecto. Por favor, intente nuevamente.")
+
+# Función para insertar una nueva caja en la base de datos
 def añadir_caja(modelo, largo_caja, ancho_caja, alto_caja):
     conn = sqlite3.connect('base_de_datos_cajas.db')
     cursor = conn.cursor()
@@ -33,12 +45,10 @@ def mostrar_cajas():
     for caja in cajas:
         print(caja)
     conn.close()
-    print("\n\n\n")
 
 # Lógica principal del programa
 def main():
     crear_tabla()
-    mostrar_cajas()
     while True:
         print("\nBienvenido al sistema de gestión de cajas:")
         print("1) Mostrar cajas almacenadas")
@@ -52,10 +62,7 @@ def main():
             print("\nCajas almacenadas:")
             mostrar_cajas()
         elif opcion == "2":
-            modelo = input("Ingrese el modelo de la caja: ")
-            largo_caja = int(input("Ingrese el largo de la caja: "))
-            ancho_caja = int(input("Ingrese el ancho de la caja: "))
-            alto_caja = int(input("Ingrese el alto de la caja: "))
+            modelo, largo_caja, ancho_caja, alto_caja = solicitar_datos_caja()
             añadir_caja(modelo, largo_caja, ancho_caja, alto_caja)
             print("¡Caja añadida exitosamente!")
         elif opcion == "3":
