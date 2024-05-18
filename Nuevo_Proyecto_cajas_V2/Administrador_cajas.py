@@ -1,8 +1,8 @@
 import sqlite3
 
 # Función para conectar a la base de datos
-def connect_to_database():
-    conn = sqlite3.connect('boxes.db')
+def connect_to_database(database_filepath):
+    conn = sqlite3.connect(database_filepath)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS boxes (
                     id INTEGER PRIMARY KEY,
@@ -112,8 +112,9 @@ def cerrar_conexion(conn):
 
 # Función principal del programa
 def main():
+    database_filepath = 'boxes.db'
     # Conexión a la base de datos
-    conn, c = connect_to_database()
+    conn, c = connect_to_database(database_filepath)
 
     while True:
         print("\nMenú:")
