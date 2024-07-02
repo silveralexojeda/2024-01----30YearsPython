@@ -1,4 +1,10 @@
 import sqlite3
+import os #import necesario al principio del archivo
+
+#ruta_base_datos = os.path.abspath("Nuevo_Proyecto_cajas_V2\filtrosV2.db") #"C:\\Users\\mi usuario\\test-python\\Base_Datos\\Economia.db")
+#Conexion = sqlite3.connect(ruta_base_datos)
+
+
 
 class Filtro:
     def __init__(self, modelo, largo, ancho, alto):
@@ -8,7 +14,7 @@ class Filtro:
         self.alto = alto
 
 def crear_tabla():
-    conn = sqlite3.connect('filtrosV2.db')
+    conn = sqlite3.connect("C:\\Users\\silve\\Videos\\visual studio code\\2024-01----30DaysPython\\2024-01----30YearsPython\\Nuevo_Proyecto_cajas_V2")
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS filtros
                  (modelo TEXT, largo REAL, ancho REAL, alto REAL)''')
