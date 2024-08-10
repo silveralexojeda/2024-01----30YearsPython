@@ -1,8 +1,12 @@
 import sqlite3
+import os #import necesario al principio del archivo
+
+ruta_base_datos_cajasV2 = os.path.abspath("C:\\Users\\silve\\Videos\\visual studio code\\2024-01----30DaysPython\\2024-01----30YearsPython\\Nuevo_Proyecto_cajas_V2\\cajasV2.db") 
+
 
 # Función para conectar a la base de datos
-def connect_to_database(database_filepath):
-    conn = sqlite3.connect(database_filepath)
+def connect_to_database(ruta_base_datos_cajasV2):
+    conn = sqlite3.connect(ruta_base_datos_cajasV2)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS boxes (
                     id INTEGER PRIMARY KEY,
@@ -112,9 +116,9 @@ def cerrar_conexion(conn):
 
 # Función principal del programa
 def main():
-    database_filepath = 'boxes.db'
+    ruta_base_datos_cajasV2 
     # Conexión a la base de datos
-    conn, c = connect_to_database(database_filepath)
+    conn, c = connect_to_database(ruta_base_datos_cajasV2)
 
     while True:
         print("\nMenú:")

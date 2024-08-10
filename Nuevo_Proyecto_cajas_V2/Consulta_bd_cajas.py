@@ -2,7 +2,7 @@ import sqlite3
 
 # Función para conectar a la base de datos
 def connect_to_database():
-    conn = sqlite3.connect('boxes.db')
+    conn = sqlite3.connect('CajasV2.db')
     c = conn.cursor()
     return conn, c
 

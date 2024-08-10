@@ -1,7 +1,8 @@
 import sqlite3
 import os #import necesario al principio del archivo
 
-#ruta_base_datos = os.path.abspath("Nuevo_Proyecto_cajas_V2\filtrosV2.db") #"C:\\Users\\mi usuario\\test-python\\Base_Datos\\Economia.db")
+ruta_base_datos_filtrosV2 = os.path.abspath("C:\\Users\\silve\\Videos\\visual studio code\\2024-01----30DaysPython\\2024-01----30YearsPython\\Nuevo_Proyecto_cajas_V2\\filtrosV2.db") 
+
 #Conexion = sqlite3.connect(ruta_base_datos)
 
 
@@ -14,7 +15,7 @@ class Filtro:
         self.alto = alto
 
 def crear_tabla():
-    conn = sqlite3.connect("C:\\Users\\silve\\Videos\\visual studio code\\2024-01----30DaysPython\\2024-01----30YearsPython\\Nuevo_Proyecto_cajas_V2")
+    conn = sqlite3.connect(ruta_base_datos_filtrosV2)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS filtros
                  (modelo TEXT, largo REAL, ancho REAL, alto REAL)''')
@@ -22,7 +23,7 @@ def crear_tabla():
     conn.close()
 
 def agregar_filtro(filtro):
-    conn = sqlite3.connect('filtrosV2.db')
+    conn = sqlite3.connect(ruta_base_datos_filtrosV2)
     c = conn.cursor()
     c.execute("INSERT INTO filtros VALUES (?, ?, ?, ?)",
               (filtro.modelo, filtro.largo, filtro.ancho, filtro.alto))
@@ -30,7 +31,7 @@ def agregar_filtro(filtro):
     conn.close()
 
 def imprimir_filtros():
-    conn = sqlite3.connect('filtrosV2.db')
+    conn = sqlite3.connect(ruta_base_datos_filtrosV2)
     c = conn.cursor()
     c.execute("SELECT * FROM filtros")
     filtros = c.fetchall()
@@ -48,7 +49,7 @@ def agregar_nuevo_filtro():
     ancho = float(input("Ingrese el ancho del nuevo filtro: "))
     alto = float(input("Ingrese el alto del nuevo filtro: "))
 
-    conn = sqlite3.connect('filtrosV2.db')
+    conn = sqlite3.connect(ruta_base_datos_filtrosV2)
     c = conn.cursor()
 
     # Verificar si ya existe un filtro con el mismo modelo
@@ -71,7 +72,7 @@ def agregar_nuevo_filtro():
         print("El nuevo filtro ha sido agregado correctamente.")
 
 def depurar_base_datos():
-    conn = sqlite3.connect('filtrosV2.db')
+    conn = sqlite3.connect(ruta_base_datos_filtrosV2)
     c = conn.cursor()
     c.execute("DELETE FROM filtros WHERE ROWID NOT IN (SELECT ROWID FROM filtros ORDER BY ROWID DESC LIMIT 3)")
     conn.commit()
@@ -79,7 +80,7 @@ def depurar_base_datos():
     print("La base de datos ha sido depurada a 3 filtros.")
 
 def agregar_filtros_iniciales(filtros):
-    conn = sqlite3.connect('filtrosV2.db')
+    conn = sqlite3.connect(ruta_base_datos_filtrosV2)
     c = conn.cursor()
 
     for filtro in filtros:
