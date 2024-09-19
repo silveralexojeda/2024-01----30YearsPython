@@ -25,6 +25,8 @@ def connect_to_database(ruta_base_datos_cajasV2):
                     cambio TEXT,
                     FOREIGN KEY (box_id) REFERENCES boxes(id)
                 )''')
+    c.execute(f'''DROP TABLE IF EXISTS cajas''')
+
     conn.commit()
     return conn, c
 
